@@ -1,3 +1,3 @@
 # Indexing
 
-- [OpenSearch](opensearch/index.md)
+- [OpenSearch](opensearch/README.md)
