@@ -23,7 +23,6 @@ docker run -d -p 9200:9200 -p 9600:9600 \
     -v [path to local folder]:/usr/share/opensearch/data \
     -e "discovery.type=single-node" \
     -e "OPENSEARCH_INITIAL_ADMIN_PASSWORD=[strong password]" \
-    -e "DISABLE_INSTALL_DEMO_CONFIG=true" \
     -e "OPENSEARCH_JAVA_OPTS=-Xms4g -Xmx4g" \
     --name opensearch-node opensearchproject/opensearch:latest
 ```

@@ -20,3 +20,4 @@ Install python modules
 ## Collection Specific Instruction
 
 - [SciDocs](scidocs.md)
+- [NTCIR-1 Adhoc](ntcir1-adhoc/README.md)
