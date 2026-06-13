@@ -21,3 +21,4 @@ Install python modules
 
 - [SciDocs](scidocs.md)
 - [NTCIR-1 Adhoc](ntcir1-adhoc/README.md)
+- [NTCIR-2 Adhoc](ntcir2-adhoc/README.md)
