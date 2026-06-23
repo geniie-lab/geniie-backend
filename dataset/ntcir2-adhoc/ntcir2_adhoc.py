@@ -22,7 +22,7 @@ def _init():
     TC_ROOT = os.path.join(os.getcwd())
     DL_DOCS = ir_datasets.util.LocalDownload(os.path.join(TC_ROOT, 'ntc12-j1gk.mod.jsonl'))
     DL_QUERIES = ir_datasets.util.LocalDownload(os.path.join(TC_ROOT, 'topic-j0101-0149.utf8.trec'))
-    # DL_QRELS = ir_datasets.util.LocalDownload(os.path.join(TC_ROOT, 'rel2_ntc1-j1_0001-0083.utf8.tsv'))
+    DL_QRELS = ir_datasets.util.LocalDownload(os.path.join(TC_ROOT, 'rel2_ntc2-j2_0101-0149.nc.utf8.tsv'))
 
     # Register the dataset with ir_datasets
     documentation = YamlDocumentation(f'{NAME}.yaml')
@@ -30,7 +30,7 @@ def _init():
         documentation('_'),
         JsonlDocs(ir_datasets.util.Cache(DL_DOCS, base_path/'ntc12-j1gk.mod.jsonl')),
         TrecQueries(ir_datasets.util.Cache(DL_QUERIES, base_path/'topic-j0101-0149.utf8.trec')),
-        # TrecQrels(ir_datasets.util.Cache(DL_QRELS, base_path/'rel2_ntc1-j1_0001-0083.utf8.tsv'), QREL_DEFS_TRAIN),
+        TrecQrels(ir_datasets.util.Cache(DL_QRELS, base_path/'rel2_ntc2-j2_0101-0149.nc.utf8.tsv'), QREL_DEFS_TRAIN),
     )
     ir_datasets.registry.register(f'{NAME}', base)
     
