@@ -22,4 +22,5 @@ Install python modules
 - [SciDocs](SciDocs/README.md)
 - [NTCIR-1 Adhoc](ntcir1-adhoc/README.md)
 - [NTCIR-2 Adhoc](ntcir2-adhoc/README.md)
+- [TREC Robust 2004](trec-robust-2004/README.md)
 - [TREC Robust 2005](trec-robust-2005/README.md)
