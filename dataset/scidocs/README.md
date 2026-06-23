@@ -10,6 +10,8 @@
 import ir_datasets
 dataset_name = "beir/scidocs"
 dataset = ir_datasets.load(dataset_name)
+docstore = dataset.docs_store()
+docstore.build()
 ```
 
 Document fields and sample data
@@ -20,7 +22,6 @@ print(dataset.docs_cls().__annotations__)
 ```
 
 ```python
-docstore = dataset.docs_store()
 doc_id='632589828c8b9fca2c3a59e97451fde8fa7d188d'
 print(docstore.get(doc_id).title)
 print(docstore.get(doc_id).text)
