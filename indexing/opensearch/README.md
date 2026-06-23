@@ -9,5 +9,7 @@
     - [BM25](ntcir1_adhoc_bm25.ipynb)
 - NTCIR-2 Adhoc
     - [BM25](ntcir2_adhoc_bm25.ipynb)
+- TREC Robust 2004
+    - [BM25](trec_robust_2004_bm25.ipynb)
 - TREC Robust 2005
     - [BM25](trec_robust_2005_bm25.ipynb)
