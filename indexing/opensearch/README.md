@@ -1,6 +1,7 @@
 # Indexing by OpenSearch
 
 - [Installation](install.md)
+- [ML Model Registration](ml_model_registration.ipynb)
 - SciDocs
     - [BM25](scidocs_bm25.ipynb)
     - [Sparse Encoder](scidocs_splade.ipynb)
