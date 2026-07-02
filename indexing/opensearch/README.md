@@ -11,6 +11,7 @@
     - [Sparse Encoder](ntcir1_adhoc_splade.ipynb)
 - NTCIR-2 Adhoc
     - [BM25](ntcir2_adhoc_bm25.ipynb)
+    - [Sparse Encoder](ntcir2_adhoc_splade.ipynb)
 - TREC Robust 2004
     - [BM25](trec_robust_2004_bm25.ipynb)
 - TREC Robust 2005
