@@ -68,7 +68,21 @@ async def predict(req: PredictRequest):
         idx = torch.nonzero(row > 0, as_tuple=False).squeeze(1)
         tokens = tokenizer.convert_ids_to_tokens(idx.tolist())
         weights = row[idx].tolist()
-        results.append(dict(zip(tokens, weights)))
+
+        sparse = {}
+        for token, weight in zip(tokens, weights):
+            # Drop tokens that are not representable as UTF-8 (pieces holding
+            # lone surrogates from byte-level decoding). Downstream JSON layers
+            # normalize each of them to the same U+FFFD string, so distinct
+            # tokens collide into duplicate object keys that OpenSearch rejects.
+            try:
+                token.encode("utf-8")
+            except UnicodeEncodeError:
+                continue
+            if weight > sparse.get(token, 0.0):
+                sparse[token] = weight
+
+        results.append(sparse)
 
     # Periodically hand cached allocator blocks back to the (unified) memory pool
     # so RSS doesn't creep. Periodic, not every call, to avoid per-request sync.
