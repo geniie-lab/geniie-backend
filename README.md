@@ -3,5 +3,6 @@ Resources for building the backend of geniie‑lab, covering datasets, search sy
 
 - [Dataset](dataset/README.md)
 - [Model Hosting](model_hosting/README.md)
-- [Indexing](indexing/README.md) (Search)
+- [Indexing](indexing/README.md)
+- [Retrieval](retrieval/README.md)
 - [LLM Integration](llm/README.md)
