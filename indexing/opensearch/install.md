@@ -24,6 +24,7 @@ docker run -d -p 9200:9200 -p 9600:9600 \
     -e "discovery.type=single-node" \
     -e "OPENSEARCH_INITIAL_ADMIN_PASSWORD=[strong password]" \
     -e "OPENSEARCH_JAVA_OPTS=-Xms4g -Xmx4g" \
+    --add-host=host.docker.internal:host-gateway \
     --name opensearch-node opensearchproject/opensearch:latest
 ```
 
@@ -65,6 +66,7 @@ docker run -d -p 9200:9200 -p 9600:9600 \
     -e "DISABLE_SECURITY_PLUGIN=true" \
     -e "DISABLE_INSTALL_DEMO_CONFIG=true" \
     -e "OPENSEARCH_JAVA_OPTS=-Xms4g -Xmx4g" \
+    --add-host=host.docker.internal:host-gateway \
     --name opensearch-node opensearchproject/opensearch:latest
 ```
 
