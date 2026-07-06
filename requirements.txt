@@ -1,0 +1,10 @@
+dotenv
+fastapi
+ipykernel
+ir_datasets
+nltk
+opensearch-py
+pandas
+sentence-transformers
+torchvision
+uvicorn
