@@ -26,3 +26,6 @@ Install python modules
 - [TREC Robust 2005](trec-robust-2005/README.md)
 - [MS MARCO v1 Passage (TREC DL 2019/2020)](msmarco-v1-passage/README.md)
 - [MS MARCO v1 Document (TREC DL 2019/2020)](msmarco-v1-document/README.md)
+- [TREC Web Track Diversity 2009-2012](trec-web-diversity/README.md)
+- [NTCIR-9 INTENT-1 Japanese Document Ranking](ntcir9-intent1-ja/README.md)
+- [NTCIR-10 INTENT-2 Japanese Document Ranking](ntcir10-intent2-ja/README.md)
