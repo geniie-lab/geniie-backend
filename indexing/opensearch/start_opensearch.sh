@@ -1,29 +1,47 @@
 #!/bin/bash
 # start-opensearch.sh — recreate the OpenSearch container, with or without snapshot support.
-# Usage:  bash indexing/opensearch/start_opensearch.sh DATA_DIR              (no snapshot volume, default)
-#         bash indexing/opensearch/start_opensearch.sh DATA_DIR --snapshot   (mount snapshot volume + register repo)
+# Usage:  bash indexing/opensearch/start_opensearch.sh DATA_DIR                       (no snapshot volume, default)
+#         bash indexing/opensearch/start_opensearch.sh DATA_DIR --snapshot SNAP_DIR   (mount snapshot volume + register repo)
+#         bash indexing/opensearch/start_opensearch.sh DATA_DIR --ja                  (install Japanese analysis plugins)
 #   DATA_DIR: existing host folder holding OpenSearch data (bind-mounted into the container)
+#   SNAP_DIR: host folder for the snapshot repository (created if missing).
+#             NOT /tmp: systemd-tmpfiles age-cleanup deletes old /tmp files (~10 days)
+#             and silently corrupts the shared-file snapshot repo.
+#   --ja:     install Japanese analysis plugins (kuromoji + icu). REQUIRED when the
+#             data folder holds Japanese indices (e.g. NTCIR) — they stay RED otherwise.
 # Safe to re-run: data lives in DATA_DIR and survives recreation.
 set -euo pipefail
 
+USAGE="Usage: $0 DATA_DIR [--snapshot SNAP_DIR] [--ja]"
 WITH_SNAPSHOT=false
+WITH_JA=false
 DATA_DIR=""
-for arg in "$@"; do
-  case "$arg" in
-    --snapshot) WITH_SNAPSHOT=true ;;
-    -*) echo "Usage: $0 DATA_DIR [--snapshot]" >&2; exit 1 ;;
+SNAP_DIR=""
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --ja) WITH_JA=true ;;
+    --snapshot)
+      WITH_SNAPSHOT=true
+      if [[ $# -lt 2 || "$2" == -* ]]; then
+        echo "ERROR: --snapshot requires a SNAP_DIR argument." >&2
+        echo "$USAGE" >&2; exit 1
+      fi
+      SNAP_DIR="$2"; shift
+      ;;
+    -*) echo "$USAGE" >&2; exit 1 ;;
     *)
       if [[ -n "$DATA_DIR" ]]; then
-        echo "Usage: $0 DATA_DIR [--snapshot]" >&2; exit 1
+        echo "$USAGE" >&2; exit 1
       fi
-      DATA_DIR="$arg"
+      DATA_DIR="$1"
       ;;
   esac
+  shift
 done
 
 if [[ -z "$DATA_DIR" ]]; then
   echo "ERROR: DATA_DIR is required." >&2
-  echo "Usage: $0 DATA_DIR [--snapshot]" >&2
+  echo "$USAGE" >&2
   exit 1
 fi
 if [[ ! -d "$DATA_DIR" ]]; then
@@ -34,8 +52,12 @@ fi
 DATA_DIR="$(realpath "$DATA_DIR")"   # docker -v requires an absolute path
 
 ### ── Edit these ──────────────────────────────────────────────
-SNAP_DIR="/tmp/opensearch-snapshots"      # host folder for snapshot repository
-PLUGINS="analysis-kuromoji analysis-icu"  # analysis plugins required by the indices
+PLUGINS=""                                # analysis plugins to install (none by default)
+if $WITH_JA; then
+  # Japanese text processing (required by the NTCIR indices — without these
+  # plugins any index using the kuromoji analyzer stays RED).
+  PLUGINS="analysis-kuromoji analysis-icu"
+fi
 IMAGE="opensearchproject/opensearch:3.5.0"  # pin to your actual version (check: curl -k -u ... https://localhost:9200)
 HEAP="4g"
 ### ────────────────────────────────────────────────────────────
@@ -70,6 +92,7 @@ if $WITH_SNAPSHOT; then
   # Snapshot dir must exist and be writable by container UID 1000
   mkdir -p "$SNAP_DIR"
   chown 1000:1000 "$SNAP_DIR"
+  SNAP_DIR="$(realpath "$SNAP_DIR")"   # docker -v requires an absolute path
   SNAP_ARGS=(-v "$SNAP_DIR":/mnt/snapshots -e "path.repo=/mnt/snapshots")
 fi
 

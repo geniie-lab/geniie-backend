@@ -32,8 +32,17 @@ Run from the **repo root** (the script locates `.env` there):
 # Normal start (no snapshot support)
 bash indexing/opensearch/start_opensearch.sh /data/opensearch
 
-# With snapshot support — required before nightly backups can run
-bash indexing/opensearch/start_opensearch.sh /data/opensearch --snapshot
+# With snapshot support — required before nightly backups can run.
+# --snapshot takes the host folder for the snapshot repository (created if
+# missing). Avoid /tmp: systemd-tmpfiles age-cleanup silently corrupts the repo.
+bash indexing/opensearch/start_opensearch.sh /data/opensearch --snapshot /data/opensearch_snapshots
+
+# With Japanese analysis plugins (kuromoji + icu). REQUIRED when the data
+# folder holds Japanese indices (e.g. NTCIR) — they stay RED otherwise.
+bash indexing/opensearch/start_opensearch.sh /data/opensearch --ja
+
+# Options combine, e.g.:
+bash indexing/opensearch/start_opensearch.sh /data/opensearch --snapshot /data/opensearch_snapshots --ja
 ```
 
 
