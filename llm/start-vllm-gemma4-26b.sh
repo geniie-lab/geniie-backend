@@ -16,7 +16,7 @@ docker run -d \
   --kv-cache-dtype fp8 \
   --kv-cache-memory-bytes 17179869184 \
   --max-model-len 131072 \
-  --max-num-seqs 4 \
+  --max-num-seqs 1 \
   --moe-backend marlin \
   --quantization modelopt \
   --reasoning-parser gemma4 \

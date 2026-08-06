@@ -14,5 +14,5 @@ docker run -d \
   --host 0.0.0.0 \
   --kv-cache-memory-bytes 17179869184 \
   --max-model-len 131072 \
-  --max-num-seqs 4 \
+  --max-num-seqs 1 \
   --no-enable-prefix-caching
