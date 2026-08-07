@@ -27,6 +27,7 @@ python -m uvicorn multilingual-e5-large:app --host 0.0.0.0 --port 8001
 python -m uvicorn opensearch-neural-sparse-encoding-multilingual-v1:app --host 0.0.0.0 --port 8002
 python -m uvicorn e5-large-v2:app --host 0.0.0.0 --port 8003
 python -m uvicorn splade-v3:app --host 0.0.0.0 --port 8004
+python -m uvicorn bge-reranker-v2-m3:app --host 0.0.0.0 --port 8005
 ```
 
 - Visit http://localhost:800N/docs to check available methods and test
