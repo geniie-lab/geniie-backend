@@ -15,4 +15,5 @@ docker run -d \
   --kv-cache-memory-bytes 17179869184 \
   --max-model-len 131072 \
   --max-num-seqs 1 \
-  --no-enable-prefix-caching
+  --no-enable-prefix-caching \
+  --reasoning-parser nemotron_v3
