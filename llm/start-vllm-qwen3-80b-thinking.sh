@@ -10,12 +10,10 @@ docker run -d \
   -v ~/.cache/huggingface:/root/.cache/huggingface \
   nvcr.io/nvidia/vllm:26.06-py3 \
   vllm serve nvidia/Qwen3-Next-80B-A3B-Thinking-NVFP4 \
-  --enable-auto-tool-choice \
   --gpu-memory-utilization 0.7 \
   --host 0.0.0.0 \
   --kv-cache-memory-bytes 17179869184 \
   --max-model-len 131072 \
   --max-num-seqs 1 \
   --no-enable-prefix-caching \
-  --reasoning-parser qwen3 \
-  --tool-call-parser hermes
+  --reasoning-parser qwen3
