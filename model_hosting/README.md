@@ -18,6 +18,7 @@ registers the models in OpenSearch via `host.docker.internal:<port>`.
 | 8002 | [opensearch-project/opensearch-neural-sparse-encoding-multilingual-v1](opensearch-neural-sparse-encoding-multilingual-v1.py) — multilingual sparse, doc-only query side | `opensearch-neural-sparse-encoding-multilingual-v1.py` |
 | 8003 | [intfloat/e5-large-v2](e5-large-v2.py) — English dense (MS MARCO / TREC DL) | `e5-large-v2.py` |
 | 8004 | [naver/splade-v3](splade-v3.py) — English sparse, symmetric (MS MARCO / TREC DL; gated repo, CC BY-NC-SA 4.0) | `splade-v3.py` |
+| 8005 | [BAAI/bge-reranker-v2-m3](bge-reranker-v2-m3.py) — multilingual cross-encoder reranker (second stage over any index) | `bge-reranker-v2-m3.py` |
 
 Launch commands:
 
