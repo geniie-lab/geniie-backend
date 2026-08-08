@@ -10,6 +10,11 @@ every notebook ends with the same optional reranking section
 - [SPLADE (Sparse Encoder)](opensearch_splade_search.ipynb)
 - [DPR (Dense Encoder)](opensearch_dpr_search.ipynb)
 
+## ClueWeb09 Category B (diversity topics + CopyCat dedup)
+
+- [BM25](opensearch_bm25_search_clueweb09.ipynb) — diversity-track topics and
+  post-retrieval near-duplicate removal via the Webis CopyCat groups
+
 ## Flat title-less indexes (MS MARCO v1 passage)
 
 - [BM25](opensearch_bm25_search_msmarco_passage.ipynb)
