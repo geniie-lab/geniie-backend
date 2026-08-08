@@ -12,3 +12,4 @@
 | TREC Robust 2005 | [Notebook](trec_robust_2005_bm25.ipynb) | [Notebook](trec_robust_2005_splade.ipynb) | [Notebook](trec_robust_2005_dpr.ipynb) |
 | MS MARCO v1 Passage (TREC DL 2019/2020) | [Notebook](msmarco_v1_passage_bm25.ipynb) | [Notebook](msmarco_v1_passage_splade.ipynb) | [Notebook](msmarco_v1_passage_dpr.ipynb) |
 | MS MARCO v1 Document (TREC DL 2019/2020) | [Notebook](msmarco_v1_document_bm25.ipynb) | [Notebook](msmarco_v1_document_splade.ipynb) | [Notebook](msmarco_v1_document_dpr.ipynb) |
+| ClueWeb09 Category B (TREC Web 2009-2012 diversity) | [Notebook](clueweb09_catb_bm25.ipynb) | - | - |
