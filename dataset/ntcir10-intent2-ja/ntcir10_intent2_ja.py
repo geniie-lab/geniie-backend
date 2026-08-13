@@ -11,8 +11,18 @@ research-purpose data distributed by NII/IDR):
 
 Queries carry their intents as subtopics (number, probability, intent type,
 description); the topic-level fac/amb/nav tag is exposed as query type.
-Qrels use the intent number in the iteration field. Documents are
-clueweb09-ja* ids; the ClueWeb09-JA corpus is licensed separately from CMU.
+Qrels use the intent number in the iteration field.
+
+Documents are proxied from ir_datasets' built-in 'clueweb09/ja' (all
+clueweb09-ja* ids), so docs_iter()/docs_store() work on this dataset
+directly. That requires the ClueWeb09-JA corpus (licensed separately from
+CMU) unpacked where the built-in expects it:
+  ~/.ir_datasets/clueweb09/corpus/ClueWeb09_Japanese_{1,2}/
+  ~/.ir_datasets/clueweb09/corpus/record_counts/ClueWeb09_Japanese_{1,2}_counts.txt
+Note the CMU download script writes these under a ClueWeb09-NTCIR-Intent/
+subdirectory; move them up a level. Doc bodies are raw HTML *bytes* (often
+Shift_JIS); use default_text() for decoded text, whose first line is the
+HTML title.
 """
 
 import re
@@ -21,10 +31,11 @@ from typing import NamedTuple, Tuple
 
 import ir_datasets
 from ir_datasets.datasets.base import Dataset
-from ir_datasets.formats import BaseQueries, BaseQrels
+from ir_datasets.formats import BaseDocs, BaseQueries, BaseQrels
 from ir_datasets.formats.trec import TrecQrel
 
 NAME = 'ntcir10-intent2-ja'
+DOCS_ID = 'clueweb09/ja'
 TOPICS_FILE = 'ntcir10intent.0301-0400.full-revised.xml'
 QRELS_FILE = 'INTENT-2DRJ.Dqrels'
 DINPROB_FILE = 'INTENT-2DRJ.5-4.DINprob'
@@ -90,6 +101,35 @@ def _parse_topics(path, intent_types):
         )
 
 
+class ProxyDocs(BaseDocs):
+    """Reuse the documents of an already-registered ir_datasets dataset."""
+
+    def __init__(self, base_id):
+        self._base_id = base_id
+
+    def _base(self):
+        return ir_datasets.load(self._base_id)
+
+    def docs_iter(self):
+        return self._base().docs_iter()
+
+    def docs_cls(self):
+        return self._base().docs_cls()
+
+    def docs_store(self):
+        # WarcDocs.docs_store() takes no field argument.
+        return self._base().docs_store()
+
+    def docs_count(self):
+        return self._base().docs_count()
+
+    def docs_namespace(self):
+        return self._base().docs_namespace()
+
+    def docs_lang(self):
+        return self._base().docs_lang()
+
+
 class Intent2Queries(BaseQueries):
     def __init__(self, path, dinprob_path):
         self._path = path
@@ -135,6 +175,7 @@ def _init():
         return ir_datasets.load(NAME)
     base_path = ir_datasets.util.home_path() / NAME
     dataset = Dataset(
+        ProxyDocs(DOCS_ID),
         Intent2Queries(base_path / TOPICS_FILE, base_path / DINPROB_FILE),
         Intent2Qrels(base_path / QRELS_FILE),
     )
