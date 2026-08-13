@@ -33,9 +33,6 @@ sit where that dataset expects them:
 ~/.ir_datasets/clueweb09/corpus/record_counts/ClueWeb09_Japanese_{1,2}_counts.txt
 ```
 
-If the corpus arrived nested under an extra directory, move its contents up
-to match the layout above — otherwise `clueweb09/ja` fails with a
-`FileNotFoundError` naming the path it expected.
 Record-position checkpoints for the Japanese WARCs ship with ir_datasets
 (`corpus.chk/ClueWeb09_Japanese_{1,2}/`), so `docs_store()` lookups seek
 directly and need no build step.

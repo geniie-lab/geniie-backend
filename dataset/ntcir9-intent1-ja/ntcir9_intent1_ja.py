@@ -16,8 +16,7 @@ directly. That requires the ClueWeb09-JA corpus (licensed separately from
 CMU) unpacked where the built-in expects it:
   ~/.ir_datasets/clueweb09/corpus/ClueWeb09_Japanese_{1,2}/
   ~/.ir_datasets/clueweb09/corpus/record_counts/ClueWeb09_Japanese_{1,2}_counts.txt
-If the corpus arrived nested under an extra directory, move its contents up
-to match this layout. Doc bodies are raw HTML *bytes* (often
+Doc bodies are raw HTML *bytes* (often
 Shift_JIS); use default_text() for decoded text, whose first line is the
 HTML title.
 """
