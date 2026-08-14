@@ -13,3 +13,4 @@
 | MS MARCO v1 Passage | [Notebook](msmarco_v1_passage_bm25.ipynb) | [Notebook](msmarco_v1_passage_splade.ipynb) | [Notebook](msmarco_v1_passage_dpr.ipynb) |
 | MS MARCO v1 Document | [Notebook](msmarco_v1_document_bm25.ipynb) | [Notebook](msmarco_v1_document_splade.ipynb) | [Notebook](msmarco_v1_document_dpr.ipynb) |
 | ClueWeb09 Category B | [Notebook](clueweb09_catb_bm25.ipynb) | - | - |
+| ClueWeb09 Japanese | [Notebook](clueweb09_ja_bm25.ipynb) | - | - |
